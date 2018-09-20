@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="demo"></div>
+</body>
+	<script type="text/javascript" src='./react.development.js'></script>
+	<script type="text/javascript" src='./react-dom.development.js'></script>
+	<script type="text/javascript" src='./babel.min.js'></script>
+	<script type="text/babel">
+		class Input extends React.Component{
+			constructor(props){
+				super(props)
+				this.state = {
+					l:"请输入内容"
+				}
+			}
+			onChange(e){
+				this.setState({
+					l: e.target.value
+				})
+			}
+			render(){
+				return (
+					<div>
+						{ this.state.l }
+						<input type='text' onChange={(e)=>this.onChange(e)} />
+					</div>
+				)
+			}
+		}
+		ReactDOM.render(<Input />,demo)
+	</script>
+</html>
