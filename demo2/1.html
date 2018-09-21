@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.tabBox div{
+			display: none
+		}
+	</style>
+</head>
+<body>
+	<div id="demo"></div>
+</body>
+	<script type="text/javascript" src='./react.development.js'></script>
+	<script type="text/javascript" src='./react-dom.development.js'></script>
+	<script type="text/javascript" src='./babel.min.js'></script>
+	<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+	<script type="text/babel">
+		class Tab extends React.Component{
+			constructor(props){
+				super(props)
+				this.state = {
+					index: 0
+				}
+			}
+			componentDidMount(){
+			}
+			onChange(e){
+			}
+			getIndex(needIndex){
+				this.setState({
+					index: needIndex
+				})
+			}
+			render(){
+				return (
+					<div>
+						<Button f={index=>this.getIndex(index)} />
+						<Box index={this.state.index} />
+					</div>
+				)
+			}
+		}
+		class Button extends React.Component{
+			constructor(props){
+				super(props)
+			}
+			render(){
+				let  f = this.props.f;
+				return (
+					<div>
+						{
+							[1,2,3].map(function(item,index){
+								return (<button  onClick={()=>f(index)} key={index}>{item}</button>)
+							})
+						}
+					</div>
+				)
+			}
+		}
+		class Box extends React.Component{
+			constructor(props){
+				super(props)
+			}
+			render(){
+				let parentIndex = this.props.index;
+				return (
+					<div className='tabBox'>
+						{
+							[1,2,3].map(function(item,index){
+								return (<div style={{ "display": parentIndex==index?"block":"none" }} key={index}>{item}</div>)
+							})
+						}
+					</div>
+				)
+			}
+		}
+		ReactDOM.render(<Tab />,demo)
+	</script>
+</html>
